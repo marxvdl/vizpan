@@ -1,0 +1,13 @@
+{
+    "files": [
+        "node_modules/easypz/easypz.d.ts",
+        "node_modules/@types/fabric/fabric-impl.d.ts",
+        "src/main.ts",
+        "src/components.ts",
+        "src/vizpan.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es6",
+    }
+}
