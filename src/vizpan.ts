@@ -1,7 +1,7 @@
 class Vizpan {
 
     private components: Component[];
-    private fabricCanvas: fabric.Canvas;
+    public fabricCanvas: fabric.Canvas;
 
     public scale = 1;
     public translateX = 0;
@@ -38,8 +38,6 @@ class Vizpan {
                 }
 
                 outer.fabricCanvas.renderAll();
-
-                console.log(transform);
             },
 
             //EasyPZ settings
@@ -50,8 +48,7 @@ class Vizpan {
                     top: -this.fabricCanvas.getHeight() / 2,
                     bottom: this.fabricCanvas.getHeight() / 2,
                     right: this.fabricCanvas.getWidth() / 2,
-                    left: -this.fabricCanvas.getWidth() / 2                    
-                    
+                    left: -this.fabricCanvas.getWidth() / 2     
                 }
             }
         );
@@ -68,10 +65,9 @@ class Vizpan {
      * @param component
      */
     public add(component: Component): void {
-        component.owner = this;
-        component.updateFabricObject();
+        component.vizpan = this;
+        component.createFabricObject();
         this.components.push(component);
-        this.fabricCanvas.add(component.fabricObject);
     }
 
 }
