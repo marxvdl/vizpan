@@ -13,7 +13,7 @@ class Vizpan {
      */
     constructor(private canvasElement: string) {
 
-        //Fabric.js setup and settings
+        // Fabric.js setup and settings
         this.fabricCanvas = new fabric.Canvas(
             canvasElement,
             {
@@ -22,25 +22,27 @@ class Vizpan {
             }
         );
 
-        //EasyPZ setup
-        let outer = this;        
+        // EasyPZ setup
+        const outer = this;
+
+        // tslint:disable-next-line: no-unused-expression
         new EasyPZ(
             document.body,
 
-            //The Pan and Zoom function
+            // The Pan and Zoom function
             (transform: { scale: number; translateX: number; translateY: number; }) => {
                 outer.translateX = transform.translateX;
                 outer.translateY = transform.translateY;
                 outer.scale = transform.scale;
 
-                for (let comp of outer.components) {
+                for (const comp of outer.components) {
                     comp.updateFabricObject();
                 }
 
                 outer.fabricCanvas.renderAll();
             },
 
-            //EasyPZ settings
+            // EasyPZ settings
             {
                 minScale: 0.1,
                 maxScale: 5,
@@ -48,12 +50,12 @@ class Vizpan {
                     top: -this.fabricCanvas.getHeight() / 2,
                     bottom: this.fabricCanvas.getHeight() / 2,
                     right: this.fabricCanvas.getWidth() / 2,
-                    left: -this.fabricCanvas.getWidth() / 2     
+                    left: -this.fabricCanvas.getWidth() / 2
                 }
             }
         );
 
-  
+
 
         this.components = [];
     }

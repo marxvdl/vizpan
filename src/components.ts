@@ -10,7 +10,7 @@ interface ComponentParameters {
 }
 
 /**
- * Generic superclass for visual stuff that can be inserted 
+ * Generic superclass for visual stuff that can be inserted
  * into the Vizpan canvas.
  */
 abstract class Component {
@@ -24,13 +24,13 @@ abstract class Component {
     }
 
     /**
-     * Generates pixel-based fabric.js positional properties based on the 
+     * Generates pixel-based fabric.js positional properties based on the
      * logical Vizpan properties, adjusted for pan and zoom.
      */
     protected generateBaseFabricOptions(): fabric.IObjectOptions {
 
-        //Set the base properties first
-        let fabricOptions: fabric.IObjectOptions = {
+        // Set the base properties first
+        const fabricOptions: fabric.IObjectOptions = {
             selectable: false,
             left: this.vizpan.scale * this.parameters.x + this.vizpan.translateX,
             top: this.vizpan.scale * this.parameters.y + this.vizpan.translateY,
@@ -40,10 +40,10 @@ abstract class Component {
             scaleY: this.vizpan.scale,
         };
 
-        //Add any subclass-specific properties
+        // Add any subclass-specific properties
         this.setAdditionalFabricOptions(fabricOptions);
 
-        //Accont for any necessary adjustments for pan and zoom properties
+        // Accont for any necessary adjustments for pan and zoom properties
         this.adjustForPanZoom(fabricOptions);
 
         return fabricOptions;
@@ -51,14 +51,16 @@ abstract class Component {
 
     /**
      * Adds new, subclass-specific options to the internal Fabric object.
-     * @param fabricOptions 
+     * @param fabricOptions
      */
+    // tslint:disable-next-line: no-empty
     protected setAdditionalFabricOptions(fabricOptions: fabric.IObjectOptions) { }
 
     /**
      * If necessary, modifiy the Fabric.js properties to account for variations in pan and zoom.
      * @param fabricProperties
      */
+    // tslint:disable-next-line: no-empty
     protected adjustForPanZoom(fabricOptions: fabric.IObjectOptions) { }
 
     /**
@@ -70,7 +72,7 @@ abstract class Component {
      * Updates the existing internal Fabric.js object according to the component parameters.
      */
     public updateFabricObject(): void {
-        let fabricOptions = this.generateBaseFabricOptions();
+        const fabricOptions = this.generateBaseFabricOptions();
         this.fabricObject.set(fabricOptions);
         this.adjustAngle();
     }
@@ -125,7 +127,7 @@ abstract class Shape extends Component {
      * Creates a new object for a subclass of Shape
      */
     public createFabricObject(): void {
-        let fabricOptions = this.generateBaseFabricOptions();
+        const fabricOptions = this.generateBaseFabricOptions();
         this.fabricObject = this.createSpecificFabricObject(fabricOptions);
         this.adjustAngle();
         this.vizpan.fabricCanvas.add(this.fabricObject);
@@ -163,7 +165,7 @@ class Ellipse extends Shape {
     }
 
     protected adjustForPanZoom(fabricProps: fabric.IObjectOptions) {
-        let options = <fabric.IEllipseOptions>fabricProps;
+        const options = fabricProps as fabric.IEllipseOptions;
         options.rx = options.width / 2;
         options.ry = options.height / 2;
     }
@@ -190,9 +192,9 @@ class VizImage extends Component {
      * Creates the image component.
      */
     public createFabricObject(): void {
-        let outer = this;
+        const outer = this;
 
-        let fabricOptions = this.generateBaseFabricOptions();
+        const fabricOptions = this.generateBaseFabricOptions();
 
         fabric.Image.fromURL(
             this.parameters.url,
@@ -203,5 +205,5 @@ class VizImage extends Component {
                 outer.vizpan.fabricCanvas.add(oImg);
             }
         );
-    } 
+    }
 }
