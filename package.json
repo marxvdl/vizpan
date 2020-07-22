@@ -4,7 +4,11 @@
   "description": "Canvas library with full support for pan and zoom",
   "main": "dist/vizpan.js",
   "author": "Marx Linden",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marxvdl/vizpan"
+  },
   "dependencies": {
     "@types/fabric": "^3.6.8",
     "easypz": "^1.1.10",
