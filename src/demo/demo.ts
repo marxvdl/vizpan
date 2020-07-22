@@ -97,9 +97,9 @@ vizpan.add(new VizImage(
     {
         x: 100,
         y: 100,
-        url: 'jeli.png',
+        url: 'https://raw.githubusercontent.com/marxvdl/gifroller/master/example-input.png',
         width: 294,
         height: 262,
         angle: -5
     }
-))
+));
